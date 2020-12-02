@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MicroChip8Sim
 {
-    class MC8Sim
+    public class MC8Sim
     {
         const int MaxProgramSize = 0x1000;
         private char[] Registers;
