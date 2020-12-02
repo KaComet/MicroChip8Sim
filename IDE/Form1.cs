@@ -32,13 +32,61 @@ namespace IDE
         {
             String text = richTextBox1.Text;
             var lexerOutput = Lexer.lex(text.Split('\n'));
+            if (lexerOutput.Item2.Count > 0)
+            {
+                string errors = "";
+                foreach (var error in lexerOutput.Item2)
+                {
+                    errors += error + '\n';
+                }
+                MessageBox.Show(errors, "Error while lexing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             var assmblerOutput = Assembler.Assemble(lexerOutput.Item1);
+
+            if (assmblerOutput.Item2.Count > 0)
+            {
+                string errors = "";
+                foreach (var error in assmblerOutput.Item2)
+                {
+                    errors += error + '\n';
+                }
+                MessageBox.Show(errors, "Error while assmbling", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             Form2 emulatorView = new Form2(assmblerOutput.Item1);
             emulatorView.Show();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            String text = richTextBox1.Text;
+            var lexerOutput = Lexer.lex(text.Split('\n'));
+            if (lexerOutput.Item2.Count > 0)
+            {
+                string errors = "";
+                foreach (var error in lexerOutput.Item2)
+                {
+                    errors += error + '\n';
+                }
+                MessageBox.Show(errors, "Error while lexing", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var assmblerOutput = Assembler.Assemble(lexerOutput.Item1);
+
+            if (assmblerOutput.Item2.Count > 0)
+            {
+                string errors = "";
+                foreach (var error in assmblerOutput.Item2)
+                {
+                    errors += error + '\n';
+                }
+                MessageBox.Show(errors, "Error while assmbling", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             SaveFileDialog saveFileDialog1 = new SaveFileDialog();
             saveFileDialog1.Filter = "MIF File|*.mif";
             saveFileDialog1.Title = "Save an MIF File";
@@ -46,9 +94,6 @@ namespace IDE
 
             if (saveFileDialog1.FileName != "")
             {
-                String text = richTextBox1.Text;
-                var lexerOutput = Lexer.lex(text.Split('\n'));
-                var assmblerOutput = Assembler.Assemble(lexerOutput.Item1);
                 var program = assmblerOutput.Item1;
 
                 System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
