@@ -30,7 +30,6 @@ namespace IDE
         private void InitializeComponent()
         {
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -42,7 +41,7 @@ namespace IDE
             | System.Windows.Forms.AnchorStyles.Right)));
             this.richTextBox1.Location = new System.Drawing.Point(12, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(788, 498);
+            this.richTextBox1.Size = new System.Drawing.Size(570, 467);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -50,7 +49,7 @@ namespace IDE
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(806, 14);
+            this.button1.Location = new System.Drawing.Point(588, 14);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 48);
             this.button1.TabIndex = 1;
@@ -61,7 +60,7 @@ namespace IDE
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(806, 68);
+            this.button2.Location = new System.Drawing.Point(588, 68);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(87, 52);
             this.button2.TabIndex = 2;
@@ -73,7 +72,7 @@ namespace IDE
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(905, 522);
+            this.ClientSize = new System.Drawing.Size(687, 491);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.richTextBox1);
@@ -87,7 +86,6 @@ namespace IDE
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
     }

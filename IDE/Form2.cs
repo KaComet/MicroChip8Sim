@@ -16,7 +16,6 @@ namespace IDE
         private MC8Sim sim;
         private Bitmap bitmap;
         private List<char> program;
-        private int c;
         public Form2(List<char> setProgram)
         {
             program = setProgram;
@@ -33,7 +32,6 @@ namespace IDE
 
 
             bitmap = new Bitmap(256, 256);
-            c = 0;
             InitTimer();
         }
 
@@ -50,7 +48,7 @@ namespace IDE
         {
             double dt = 0.00006;
             for (int i = 0; i < 5000; i++)
-                sim.tick(0.00006 * 100.0);
+                sim.tick(dt * 100.0);
 
             for (var i = 0; i < 0x100; i++)
             {
@@ -66,7 +64,7 @@ namespace IDE
                     }
                 }
             }
-            //Console.WriteLine(c++);
+
             this.Refresh();
         }
 

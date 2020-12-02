@@ -39,6 +39,46 @@ namespace IDE
 
         private void button2_Click(object sender, EventArgs e)
         {
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "MIF File|*.mif";
+            saveFileDialog1.Title = "Save an MIF File";
+            saveFileDialog1.ShowDialog();
+
+            if (saveFileDialog1.FileName != "")
+            {
+                String text = richTextBox1.Text;
+                var lexerOutput = Lexer.lex(text.Split('\n'));
+                var assmblerOutput = Assembler.Assemble(lexerOutput.Item1);
+                var program = assmblerOutput.Item1;
+
+                System.IO.FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile();
+
+                string mifHeader = "WIDTH=16;\n" +
+                    "DEPTH=4096;\n\n" +
+                    "ADDRESS_RADIX=HEX;\n" +
+                    "DATA_RADIX=HEX;\n\n" +
+                    "CONTENT BEGIN\n";
+
+                byte[] headerBytes = new UTF8Encoding(true).GetBytes(mifHeader);
+                fs.Write(headerBytes, 0, headerBytes.Length);
+
+                for (var i = 0; i < program.Count; i++)
+                {
+                    string line = $"\t{i.ToString("X4")}\t:\t{((int)program[i]).ToString("X4")};\n";
+                    byte[] lineBytes = new UTF8Encoding(true).GetBytes(line);
+                    fs.Write(lineBytes, 0, lineBytes.Length);
+                }
+
+                string fill = $"\t[{program.Count.ToString("X4")}..0FFF]\t:\t1000;\n";
+                byte[] fillBytes = new UTF8Encoding(true).GetBytes(fill);
+                fs.Write(fillBytes, 0, fillBytes.Length);
+
+                string footer = "END;\n";
+                byte[] footerBytes = new UTF8Encoding(true).GetBytes(footer);
+                fs.Write(footerBytes, 0, footerBytes.Length);
+
+                fs.Close();
+            }
         }
     }
 }
